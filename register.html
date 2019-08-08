@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Multilingual noticeboard</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+		<!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"><img src="img/QUTbanner.png" height="45px"></a>
+			<button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="home.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Chat room</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Learning materials</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Video</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Games</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Request for tutoring</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Statistics</a>
+					</li>
+					<li>
+						<button class="btn btn-primary active" href="#">Login</button>
+					</li>
+					<li>
+						<button class="btn btn-primary active" href="/register.html">Register</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</nav>
+
+		<!-- Register form -->
+		<div class="container">
+		<div class="row justify-content-lg-center">
+			<div class="col-lg-10">
+				<div class="tab-content" id="myTabContent">
+                    <h3 class="register-heading">Register a user</h3>
+                    <div class="row register-form justify-content-lg-center">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First Name *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
+                                    <option>What is your Birthdate?</option>
+                                    <option>What is Your old Phone Number</option>
+                                    <option>What is your Pet Name?</option>
+                                </select>
+                            </div>
+							<div class="form-group">
+                                <select class="form-control">
+                                    <option class="hidden"  selected disabled>Please select your province</option>
+                                    <option>QLD</option>
+                                    <option>NSW</option>
+                                    <option>ACT</option>
+									<option>NT</option>
+									<option>SA</option>
+									<option>TAS</option>
+									<option>VIC</option>
+									<option>WA</option>
+									<option>International</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="maxl">
+                                    <label class="radio inline"> 
+                                        <input type="radio" name="gender" value="male" checked>
+                                        <span> Male </span> 
+                                    </label>
+                                    <label class="radio inline"> 
+                                        <input type="radio" name="gender" value="female">
+                                        <span>Female </span> 
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+							<div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone (Optional)" value="" />
+                            </div>
+							<div class="form-group">
+                                <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
+                            </div>
+                            <input type="submit" class="btnRegister"  value="Register"/>
+                        </div>
+                    </div>
+                  
+			</div>
+		</div>
+		</div>
+    </body>
+</html>

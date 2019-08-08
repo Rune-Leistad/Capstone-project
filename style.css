@@ -9,7 +9,7 @@ figure {
 .active{
   background-color: rgb(100, 175, 255);
 }
-.btn:pressed{
+.btn:active{
 	border-color:white;
 	border: 1px;
 }
@@ -29,4 +29,19 @@ figure {
 }
 [class*="col-"] {
 	padding: 1rem;
+}
+
+.container {
+	text-align: center;
+	padding: 2%;
+	width: 75%;
+}
+
+.btnRegister {
+	border-radius: 4px;
+}
+
+.navbar {
+	border-bottom: 2px;
+	border-color: white;
 }
