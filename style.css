@@ -9,6 +9,10 @@ figure {
 .active{
   background-color: rgb(100, 175, 255);
 }
+.btn:pressed{
+	border-color:white;
+	border: 1px;
+}
 .fixed-wrap {
 	clip: rect(0, auto, auto, 0);
 	position: absolute;
