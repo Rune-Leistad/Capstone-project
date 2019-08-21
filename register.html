@@ -1,137 +1,149 @@
 <!doctype html>
+
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Multilingual noticeboard</title>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-        <!--Font Awesome-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <link href="style.css" rel="stylesheet">
-    </head>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Multilingual noticeboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+	<!--Font Awesome (added because you use icons in your prepend/append)-->
+	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+		
+	<!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
     <body>
 		<!-- Navigation -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="home.html"><img src="img/QUTbanner.png" height="45px"></a>
-			<button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="home.html">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="chat.html">Chat room</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="learning-materials.html">Learning materials</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="video.html">Video</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="games.html">Games</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="tutor-request.html">Request for tutoring</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="statistics.html">Statistics</a>
-					</li>
-					<li>
-						<a href="login.html"><button class="btn btn-primary active" type="button">Login</button></a>
-					</li>
-				</ul>
+			<nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="home.html"><img src="img/QUTbanner.png" height="45px"></a>
+				<button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="home.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="chat.html">Chat room</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="learning-materials.html">Learning materials</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="video.html">Video</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="games.html">Games</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="tutor-request.html">Request for tutoring</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="statistics.html">Statistics</a>
+						</li>
+						<li>
+							<a href="login.html"><button class="btn btn-primary active" type="button">Login</button></a>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		</nav>
+			</nav>
 
 		<!-- Register form -->
-		<div class="container">
-		<div class="row justify-content-lg-center">
-			<div class="col-lg-10">
-				<div class="tab-content" id="myTabContent">
-                    <h3 class="register-heading">Register a user</h3>
-                    <div class="row register-form justify-content-lg-center">
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name *" value="" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email *" value="" />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password *" value="" />
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
-                                    <option>What is your Birthdate?</option>
-                                    <option>What is Your old Phone Number</option>
-                                    <option>What is your Pet Name?</option>
-                                </select>
-                            </div>
-							<div class="form-group">
-                                <select class="form-control">
-                                    <option class="hidden"  selected disabled>Please select your province</option>
-                                    <option>QLD</option>
-                                    <option>NSW</option>
-                                    <option>ACT</option>
-									<option>NT</option>
-									<option>SA</option>
-									<option>TAS</option>
-									<option>VIC</option>
-									<option>WA</option>
-									<option>International</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="maxl">
-                                    <label class="radio inline"> 
-                                        <input type="radio" name="gender" value="male" checked>
-                                        <span> Male </span> 
-                                    </label>
-                                    <label class="radio inline"> 
-                                        <input type="radio" name="gender" value="female">
-                                        <span>Female </span> 
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-							<div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last Name *" value="" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone (Optional)" value="" />
-                            </div>
-							<div class="form-group">
-                                <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
-                            </div>
-                            <input type="submit" class="btnRegister"  value="Register"/>
-                        </div>
-                    </div>
-                </div>
+			<div class="boostrap-iso">
+			<div class="row justify-content-lg-center">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<div class="tab-content" id="myTabContent">
+						<form method="post">
+							<h3 class="register-heading">Register a user</h3>
+							<div class="row register-form justify-content-lg-center">
+
+							<!-- First colum -->
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<input type="text" class="form-control requiredField" placeholder="First Name *" value="" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" id="date" name="date" placeholder="Date of birth *" type="text"/>
+									</div>
+									<div class="form-group">
+										<input type="email" class="form-control" placeholder="Your Email *" value="" />
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" placeholder="Password *" value="" />
+									</div>
+									<div class="form-group">
+										<select class="form-control">
+											<option class="hidden"  selected disabled>Please select your Sequrity Question</option>
+											<option>What is your Birthdate?</option>
+											<option>What is Your old Phone Number</option>
+											<option>What is your Pet Name?</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<div class="maxl">
+											<label class="radio inline"> 
+												<input type="radio" name="gender" value="male" checked>
+												<span> Male </span> 
+											</label>
+											<label class="radio inline"> 
+												<input type="radio" name="gender" value="female">
+												<span>Female </span> 
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<!-- Second colum -->
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Last Name *" value="" />
+									</div>
+									<div class="form-group">
+										<select class="form-control">
+											<option class="hidden"  selected disabled>Please select your province</option>
+											<option>QLD</option>
+											<option>NSW</option>
+											<option>ACT</option>
+											<option>NT</option>
+											<option>SA</option>
+											<option>TAS</option>
+											<option>VIC</option>
+											<option>WA</option>
+											<option>International</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone (Optional)" value="" />
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
+									</div>
+									<input type="submit" class="btnRegister"  value="Register"/>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
+			</div>
+
 
 		<!-- footer -->
 		<footer id="footer">
 			<div class="footer-bottom bg-primary">
 				<div class="container" style="color:white;">
 					<div class="row">
-						<div class="col-md-4 col-md-6 footer-info">
+						<div class="col-md-5 col-md-5 footer-info">
 							<a href="https://qut.edu.au">
 								<img src="img/QUT.jpg" id="footerImg" style="max-width:150px;"/>
 							</a>
@@ -141,7 +153,7 @@
 								them selves.
 							</p>
 						</div>
-						<div class="col-lg-2 col-md-6 footer-links">
+						<div class="col-lg-2 col-md-4 footer-links">
 							<h4>Useful links</h4>
 							<ul>
 								<li><a href="https://qut.edu.au" style="color:white;">QUT Home</a></li>
@@ -149,10 +161,10 @@
 								<li><a href="https://qut.edu.au" style="color:white;">QUT</a></li>
 							</ul>
 						</div>
-						<div class="col-lg-3 col-md-6 fotter-contact">
+						<div class="col-lg-5 col-md-5 fotter-contact">
 							<h3>Contact Us</h3>
 							<p>
-								<strong>Team: </strong> WeCAN<br>
+								<strong>Team:</strong> WeCAN<br>
 								<strong>Phone:</strong> +61 123 456 789<br>
 								<strong>Email:</strong> contactus@someemail.com.au<br>
 							</p>
@@ -168,5 +180,27 @@
 				</div>
 			</div>
 		</footer>
+
+		<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+		<!--  jQuery -->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+		<!-- Bootstrap Date-Picker Plugin -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+		<script>
+			$(document).ready(function(){
+			  var date_input=$('input[name="date"]'); //our date input has the name "date"
+			  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			  var options={
+				format: 'dd/mm/yyyy',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			  };
+			  date_input.datepicker(options);
+			})
+		</script>
     </body>
 </html>

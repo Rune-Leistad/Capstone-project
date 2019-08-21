@@ -6,10 +6,7 @@
 	bottom: 0;
 	width: 100%;
 }
-.footer-img {
-	width: 100px;
-	height: 100px;
-}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -17,6 +14,7 @@ ul {
 .active{
   background-color: rgb(100, 175, 255);
 }
+
 .btn:active{
 	border-color:white;
 	border: 1px;
