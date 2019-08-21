@@ -1,10 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
-figure {
-	position: relative;
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
 	width: 100%;
-	height: 60%;
-	margin: 0!important;
+}
+.footer-img {
+	width: 100px;
+	height: 100px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 .active{
   background-color: rgb(100, 175, 255);
@@ -29,12 +37,6 @@ figure {
 }
 [class*="col-"] {
 	padding: 1rem;
-}
-
-.container {
-	text-align: center;
-	padding: 2%;
-	width: 75%;
 }
 
 .btnRegister {
