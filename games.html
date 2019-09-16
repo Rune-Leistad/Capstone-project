@@ -11,6 +11,51 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <link href="style.css" rel="stylesheet">
+		
+		<style>
+		.collapsible {
+		  background-color: #777;
+		  color: white;
+		  cursor: pointer;
+		  padding: 18px;
+		  width: 50%;
+		  border: none;
+		  text-align: center;
+		  outline: none;
+		  font-size: 15px;
+		}
+
+		.drop, .collapsible:hover {
+		  background-color: #555;
+		}
+
+		.content {
+		  max-height: 0;
+		  width: 50%;
+		  overflow: hidden;
+		  transition: max-height 0.2s ease-out;
+		  background-color: #f1f1f1;
+		  text-align: center;
+		}
+		
+		.collapsible:after {
+		  content: '\02795'; /* Unicode character for "plus" sign (+) */
+		  font-size: 13px;
+		  color: white;
+		  float: right;
+		  margin-left: 5px;
+		}
+
+		.drop:after {
+		  content: "\2796"; /* Unicode character for "minus" sign (-) */
+		}
+		
+		.center-class {
+			text-align: center;
+		}
+		</style>
+		
+		
     </head>
     <body>
 		<!-- Navigation -->
@@ -72,8 +117,17 @@
 			</div>
 		</div>
 		</div>
-
-				<!-- footer -->
+		
+		<div class="center-class">
+		<button type="button" class="collapsible">Fish Need Water</button>
+		<div class="content">
+		<embed width="660" height="480" base="https://external.kongregate-games.com/gamez/0009/9205/live/" src="https://external.kongregate-games.com/gamez/0009/9205/live/embeddable_99205.swf" type="application/x-shockwave-flash"></embed><br/>
+		</div> </div>
+		
+		
+		
+		
+		<!-- footer -->
 		<footer id="footer">
 			<div class="footer-bottom bg-primary">
 				<div class="container" style="color:white;">
@@ -116,4 +170,20 @@
 			</div>
 		</footer>
     </body>
+	<script>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+
+	for (i = 0; i < coll.length; i++) {
+	  coll[i].addEventListener("click", function() {
+		this.classList.toggle("drop");
+		var content = this.nextElementSibling;
+		if (content.style.maxHeight){
+		  content.style.maxHeight = null;
+		} else {
+		  content.style.maxHeight = content.scrollHeight + "px";
+		} 
+	  });
+	}
+	</script>
 </html>

@@ -10,13 +10,13 @@
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <link href="style.css" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet">
     </head>
     <body>
 		<!-- Navigation -->
         <nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="home.html"><img src="img/QUTbanner.png" height="45px"></a>
+			<a class="navbar-brand" href="home.html"><img src="http://localhost:3000/img/QUTbanner.png" height="45px"></a>
 			<button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -62,8 +62,9 @@
 				</div>
 				<h1 class="display-4">Login page</h1>
 				<hr>
-				    <div class="row login-form justify-content-lg-center">
-						<form action="auth" method="POST">
+					<form action = "auth" method="POST">
+						<div class="row login-form justify-content-lg-center">
+						
 							<div class="col-lg-5">
 								<div class="form-group">
 									<input type="email" name="username" class="form-control" placeholder="Email" value="" />
