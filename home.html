@@ -84,18 +84,27 @@
 		<hr>
 		<button type="button" class="open-button fa fa-plus fa-2x" onclick="openForm()"></button>
 
-		<div class="form-popup" id="createNoticeboardPost">
-			<form class="form-container">
+		<div class="form-popup" id="createNoticeboardPost" style="width: 50%;">
+			<form class="form-container" style="width:100%;">
 				<h1>Write on the noticeboard</h1>
-				
-				<label for="email"><b>Topic</b></label>
-				<input type="text" name="topic" required>
-
-				<label for="content"><b>Content</b></label>
-				<input type="text" name="textContent" required>
-
-				<button type="submit" class="btn">Post</button>
-				<button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+				<div class="column">
+					<div class="row">
+						<label for="email"><b>Topic</b></label>
+					</div>
+					<div class="row">
+						<input type="text" name="topic" id="postTopic" required>
+					</div>
+					<div class="row">
+						<label for="content"><b>Content</b></label>
+					</div>
+					<div class="row">
+						<input type="text" name="textContent" id="postContent" required>
+					</div>
+					<div class="row" style="float: right;">
+						<button type="submit" class="btn-primary">Post</button>
+						<button type="submit" class="btn-grey" onclick="closeForm()">Close</button>
+					</div>
+				</div>
 			</form>
 		</div>
 
