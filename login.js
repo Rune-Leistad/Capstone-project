@@ -66,7 +66,13 @@ app.get('/video.html', function(request, response) {
 	response.sendFile(__dirname + "/video.html");
 });
 
+app.get('/changepass.html', function(request, response) {
+	response.sendFile(__dirname + "/changepass.html");
+});
 
+app.get('/login.html', function(request, response) {
+	response.sendFile(__dirname + "/login.html");
+});
 
 app.post('/auth', function(request, response) {
 	var username = request.body.username;
@@ -98,6 +104,12 @@ app.post('/reg', function(request, response) {
 	response.redirect("/home.html");
 });
 
+app.post('/chng', function(request, response) {
+	con.query('UPDATE `user_information`.`log_in_data` SET `user_password` = ? WHERE (`user_email` = ? AND `user_secQAns` = ?);', [request.body.password, request.body.username, request.body.answer], function(error, results, fields){});
+	request.session.loggedin = true;
+	request.session.username = request.body.email;
+	response.redirect("/home.html");
+});
 
 
 
