@@ -9,3 +9,16 @@ function showPost(ident) {
     moreText.style.display = "inline";
   }
 }
+
+function cycleViewPosts() {
+    var viewFeatured = document.getElementById("featuredPosts");
+    var viewAll = document.getElementById("allPosts");
+    if (viewFeatured.style.display == "none") {
+        viewFeatured.style.display = "inline";
+        viewAll.style.display = none;
+    }
+    else {
+        viewFeatures.style.displa = "none";
+        viewAll.style.dipslay = "inline";
+    }
+}

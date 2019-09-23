@@ -63,7 +63,7 @@
 			<div class="row welcome text-center">
 				<div class="col-12">
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
+						<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="chosenLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
 						Translate
 						</button>
 					</div>
@@ -85,7 +85,7 @@
 		<button type="button" class="open-button fa fa-plus fa-2x" onclick="openForm()"></button>
 
 		<div class="form-popup" id="createNoticeboardPost" style="width: 50%;">
-			<form class="form-container" style="width:100%;">
+			<form class="form-container" style="width:100%;" method="POST" action="newpost">
 				<h1>Write on the noticeboard</h1>
 				<div class="column">
 					<div class="row">
@@ -98,10 +98,10 @@
 						<label for="content"><b>Content</b></label>
 					</div>
 					<div class="row">
-						<input type="text" name="textContent" id="postContent" required>
+						<input type="text" name="content" id="postContent" required>
 					</div>
 					<div class="row" style="float: right;">
-						<button type="submit" class="btn-primary">Post</button>
+						<button type="submit" class="btn-primary" value="Click here to submit your post">Post</button>
 						<button type="submit" class="btn-grey" onclick="closeForm()">Close</button>
 					</div>
 				</div>
@@ -117,6 +117,22 @@
 			  document.getElementById("createNoticeboardPost").style.display = "none";
 			}
 		</script>
+		<script src="test.js"></script>
+		<!-- Noticeboard featured and all posts -->
+		<div id="tabsView">
+			<ul class="nav nav-tabs justify-content-center">
+				<li class="nav-item active" id="featuredPosts">
+					<a class="nav-link active" href="#">Active</a>
+				</li>
+				<li class="nav-item" id="allPosts">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+			</ul>
+		</div>
+		<div id="tabsElements">
+			
+		</div>
+
 
 
 		<h4 class="lead text-center">Featured posts</h4>

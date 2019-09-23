@@ -78,15 +78,19 @@ app.post('/auth', function(request, response) {
 	var username = request.body.username;
 	var password = request.body.password;
 	if (username && password) {
+        con.connect(function(err) {
+            console.log(err);
+    });
 		con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ? AND user_password = ?', [username, password], function(error, results, fields) {
 			if (results.length > 0) {
+                
 				console.log("MATCH");
 				request.session.loggedin = true;
 				request.session.username = username;
 				response.redirect("/home.html");
 			} else {
 				response.send('Incorrect Username and/or Password!');
-			}			
+			}
 			response.end();
 		});
 	} else {
@@ -96,7 +100,7 @@ app.post('/auth', function(request, response) {
 });
 
 
-
+// Register user
 app.post('/reg', function(request, response) {
 	con.query('INSERT INTO `user_information`.`log_in_data` (`user_name`, `user_email`, `user_password`, `user_secQ`, `user_secQAns`, `user_state`, `user_gender`, `user_phone`) VALUES (?, ?, ?, ?, ?, ?, "Male", ?);', [request.body.firstname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.phone], function(error, results, fields){});
 	request.session.loggedin = true;
@@ -104,6 +108,7 @@ app.post('/reg', function(request, response) {
 	response.redirect("/home.html");
 });
 
+// Update password
 app.post('/chng', function(request, response) {
 	con.query('UPDATE `user_information`.`log_in_data` SET `user_password` = ? WHERE (`user_email` = ? AND `user_secQAns` = ?);', [request.body.password, request.body.username, request.body.answer], function(error, results, fields){});
 	request.session.loggedin = true;
@@ -111,9 +116,11 @@ app.post('/chng', function(request, response) {
 	response.redirect("/home.html");
 });
 
-
-
-
+// Creating noticeboard posts
+app.post('/newpost', function(request, response) {
+    con.query('INSERT INTO `user_information`.`forum_posts` (`user_id`, `post_language`, `post_topic`, `post_content`) VALUES ("1", "ENG", ?, ?);', [request.body.topic, request.body.content], function(error, results, fields){console.log(error)});
+    response.redirect("/home.html");
+});
 
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
