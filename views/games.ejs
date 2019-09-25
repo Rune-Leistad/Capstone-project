@@ -1,0 +1,70 @@
+<style>
+.collapsible {
+	background-color: #777;
+	color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: 50%;
+	border: none;
+	text-align: center;
+	outline: none;
+	font-size: 15px;
+}
+
+.drop, .collapsible:hover {
+	background-color: #555;
+}
+
+.content {
+	max-height: 0;
+	width: 50%;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	background-color: #f1f1f1;
+	text-align: center;
+}
+		
+.collapsible:after {
+	content: '\02795'; /* Unicode character for "plus" sign (+) */
+	font-size: 13px;
+	color: white;
+	float: right;
+	margin-left: 5px;
+}
+
+.drop:after {
+	content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+		
+.center-class {
+	text-align: center;
+}
+</style>
+
+<div class="container-fluid padding">
+	<div class="row welcome text-center">
+		<div class="col-12">
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
+				Translate
+				</button>
+			</div>
+			<h1 class="display-4">Games page!</h1>
+			<hr>
+				
+			<div>
+				<p class="lead">This is a multilingual noticeboard created by team WeCAN 
+				for our Capstone Project. We aim to make a noticeboard to support any type
+				of plugin and provde the user of the site with a manual of how to use it
+				them selves.</p>
+			</div>
+		</div>
+	</div>
+</div>
+		
+<div class="center-class">
+	<button type="button" class="collapsible">Fish Need Water</button>
+	<div class="content">
+		<embed width="660" height="480" base="https://external.kongregate-games.com/gamez/0009/9205/live/" src="https://external.kongregate-games.com/gamez/0009/9205/live/embeddable_99205.swf" type="application/x-shockwave-flash"></embed><br/>
+	</div>
+</div>

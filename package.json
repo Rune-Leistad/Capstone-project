@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/exlipy/Capstone-project/issues"
   },
-  "homepage": "https://github.com/exlipy/Capstone-project#readme"
+  "homepage": "https://github.com/exlipy/Capstone-project#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-layouts": "^1.0.0"
+  }
 }

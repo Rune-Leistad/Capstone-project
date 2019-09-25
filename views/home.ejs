@@ -1,0 +1,91 @@
+<div class="container-fluid padding">
+  <div class="row welcome text-center">
+    <div class="col-12">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle pull-right" type="button" id="chosenLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
+          Translate
+        </button>
+      </div>
+      <h1 class="display-4">Welcome to QUT's multilingual noticeboard!</h1>
+      <hr/>
+
+      <div>
+        <p class="lead">
+          This is a multilingual noticeboard created by team WeCAN
+          for our Capstone Project. We aim to make a noticeboard to support any type
+          of plugin and provde the user of the site with a manual of how to use it
+          them selves.</p>
+      </div>
+      <% if(logged_in) { %>
+      <button type="button" class="open-button fa fa-plus fa-2x" onclick="openForm()"></button>
+      <% } %>
+
+
+      <div class="form-popup" id="createNoticeboardPost" style="width: 50%;">
+        <form class="form-container" style="width:100%;" method="POST" action="newpost">
+          <h1>Write on the noticeboard</h1>
+          <div class="column">
+            <div class="row">
+              <label for="email"><b>Topic</b></label>
+            </div>
+            <div class="row">
+              <input type="text" name="topic" id="postTopic" required="" />
+					  </div>
+            <div class="row">
+              <label for="content"><b>Content</b></label>
+            </div>
+            <div class="row">
+              <input type="text" name="content" id="postContent" required="" />
+					  </div>
+            <div class="row" style="float: right;">
+              <button type="submit" class="btn-primary" value="Click here to submit your post">Post</button>
+              <button type="submit" class="btn-grey" onclick="closeForm()">Close</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <script>
+        function openForm() {
+        document.getElementById("createNoticeboardPost").style.display = "block";
+        }
+
+        function closeForm() {
+        document.getElementById("createNoticeboardPost").style.display = "none";
+        }
+      </script>
+      <% if(logged_in) { %>
+      <div id="tabsView">
+        <ul class="nav nav-tabs justify-content-center">
+          <li class="nav-item active" id="featuredPosts" action="/getfeatured">
+            <a class="nav-link active" href="#">Featured</a>
+          </li>
+          <li class="nav-item" id="allPosts">
+            <a class="nav-link" href="#">The noticeboard</a>
+          </li>
+        </ul>
+      </div> <!-- tabs view-->
+      <% } %>
+      <div>
+        <div class="col-12 px-5">
+          <% for(var i=0; i < posts.length; i++) { %>
+          <div class="card" onclick="showPost(1)">
+            <div class="card-header bg-primary text-center text-white">
+              <%= posts[i].post_topic %>
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <span id="dots1">...</span><span id="showMore1" style="display: none;">
+                  <%= posts[i].post_content %>
+                </span>
+              </p>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -51,25 +51,9 @@ button {
 	border-radius: 4px;
 }
 
-.navbar {
-	border-bottom: 2px;
-	border-color: white;
+#tabsView {
+	margin-top: 50px;
 }
-
-#sidebar-wrapper {
-	margin-left:0;
-	min-height: 100vh;
-}
-
-.border-right {
-	border-right: 1px solid;
-}
-
-.bg-light {
-	background-color: #f8f9fa!important;
-}
-
-
 
 {box-sizing: border-box;}
 
@@ -80,7 +64,6 @@ button {
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  opacity: 0.8;
   position: fixed;
   bottom: 50px;
   right: 28px;
