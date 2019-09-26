@@ -26,7 +26,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-    response.render('home', {page_name: 'home'});
+    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id', function(error, results, fields) {
+        if(error)
+            console.log(error.message);
+        else
+            response.render('home', {page_name: 'home',
+                                logged_in: false,
+                                posts: results});
+    });
+
 });
 
 
@@ -36,17 +44,18 @@ app.get('/style.css', function(request, response) {
 
 
 app.get('/home', function(request, response) {
-    con.query('SELECT * FROM user_information.forum_posts', function(error, results, fields) {
-      response.render('home', {
-                      page_name: 'home',
-                      logged_in: request.session.loggedin,
-                      posts: results});
+    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id', function(error, results, fields) {
+        if(error)
+            console.log(error.message);
+        else
+            response.render('home', {page_name: 'home',
+                                logged_in: false,
+                                posts: results});
     });
-
 });
 
 app.get('/chat', function(request, response) {
-	response.render('chat', {page_name: 'chat', logged_in: request.session.loggedin});
+	 response.render('chat', {page_name: 'chat', logged_in: request.session.loggedin});
 });
 
 app.get('/games', function(request, response) {
