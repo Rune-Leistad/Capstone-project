@@ -7,18 +7,34 @@
 	width: 100%;
 }
 
-.card:hover {
+.card-group:hover {
 	-webkit-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
 	-moz-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
 	-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+}
+
+#profileImg {
+	align-self: center;
+	width: 50px;
+	height: 50px;
+}
+
+#editPost {
+	position: relative;
+	bottom: 5px;
+	right: 5px;
 }
 
 #showMore {
 	display: none;
 }
 
-.card {
+.card-group {
 	margin-bottom: 20px;
+}
+
+.card-group>.card {
+	margin-bottom: 0;
 }
 
 ul {
@@ -63,15 +79,16 @@ button {
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  position: fixed;
-  bottom: 50px;
-  right: 28px;
-  width: 5%;
+	background-color: #555;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	z-index: 1;
+	position: fixed;
+	bottom: 50px;
+	right: 28px;
+	width: 5%;
 }
 
 /* The popup form - hidden by default */

@@ -26,15 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id', function(error, results, fields) {
-        if(error)
-            console.log(error.message);
-        else
-            response.render('home', {page_name: 'home',
-                                logged_in: false,
-                                posts: results});
-    });
-
+    response.render('home');
 });
 
 
@@ -47,10 +39,12 @@ app.get('/home', function(request, response) {
     con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id', function(error, results, fields) {
         if(error)
             console.log(error.message);
-        else
+        else {
             response.render('home', {page_name: 'home',
-                                logged_in: false,
+                                logged_in: request.session.loggedin,
+                                u_id: request.session.userid,
                                 posts: results});
+        }
     });
 });
 
@@ -96,7 +90,7 @@ app.post('/auth', function(request, response) {
 	if (username && password) {
         con.connect(function(err) {
             console.log(err);
-    });
+        });
 		con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ? AND user_password = ?', [username, password], function(error, results, fields) {
 			if (results.length > 0) {
 
@@ -149,6 +143,18 @@ app.post('/newpost', function(request, response) {
     con.query('INSERT INTO `user_information`.`forum_posts` (`user_id`, `post_language`, `post_topic`, `post_content`, `post_views`) VALUES (?, "ENG", ?, ?, "0");', [request.session.userid, request.body.topic, request.body.content], function(error, results, fields){console.log(error)});
     console.log("Noticeboard post successfully saved");
     response.redirect("/home");
+});
+
+app.get('/getFeatured', function(request, response) {
+    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id ORDER BY forum_posts.post_views DESC LIMIT 3', function(error, results, fields) {
+        console.log(result.length);
+        if(error)
+            console.log(error.message);
+        else
+            response.render('home', {page_name: 'home',
+                                logged_in: request.session.loggedin,
+                                posts: results});
+    });
 });
 
 app.get('/home', function(request, response) {

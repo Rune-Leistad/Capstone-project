@@ -26,41 +26,41 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-          <li
-            <% if (page_name === 'home') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/home">Home</a>
-          </li>
-          <li
-            <% if (page_name === 'chat') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/chat">Chat Room</a>
-          </li>
-          <li
-            <% if (page_name === 'learning-materials') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/learning-materials">Learning Materials</a>
-          </li>
-          <li
-            <% if (page_name === 'video') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/video">Watch Videos</a>
-          </li>
-          <li
-            <% if (page_name === 'games') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/games">Educational games</a>
-          </li>
-          <li
-            <% if (page_name === 'tutor-request') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/tutor-request">Request for tutoring</a>
-          </li>
-          <li
-            <% if (page_name === 'statistics') { %>class="nav-item active" <% } %> >
-            <a class="nav-link" href="/statistics">Statistics</a>
-          </li>
-					<li>
-            <% if (!logged_in) { %>
-						  <a href="login"><button class="btn btn-primary active" type="button">Login</button></a>
-            <% } else { %>
-              <a href="#"><button class="btn btn-primary active" type="button">Log out</button></a>
-            <% } %>
-					</li>
+                  <li
+                    <% if (page_name === 'home') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/home">Home</a>
+                  </li>
+                  <li
+                    <% if (page_name === 'chat') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/chat">Chat Room</a>
+                  </li>
+                  <li
+                    <% if (page_name === 'learning-materials') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/learning-materials">Learning Materials</a>
+                  </li>
+                  <li
+                    <% if (page_name === 'video') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/video">Watch Videos</a>
+                  </li>
+                  <li
+                    <% if (page_name === 'games') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/games">Educational games</a>
+                  </li>
+                  <li
+                    <% if (page_name === 'tutor-request') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/tutor-request">Request for tutoring</a>
+                  </li>
+                  <li
+                    <% if (page_name === 'statistics') { %>class="nav-item active" <% } %> >
+                    <a class="nav-link" href="/statistics">Statistics</a>
+                  </li>
+        					<li>
+                    <% if (!logged_in) { %>
+        			  <a href="login"><button class="btn btn-primary active" type="button">Login</button></a>
+                    <% } else { %>
+                      <a href="#"><button class="btn btn-primary active" type="button">Log out</button></a>
+                    <% } %>
+				  </li>
 				</ul>
 			</div>
 		</div>
