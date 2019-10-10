@@ -1,3 +1,4 @@
+<html lang="en-US">
 <div class="container-fluid padding">
   <div class="row welcome text-center">
     <div class="col-12">
@@ -5,6 +6,7 @@
         <button class="btn btn-primary dropdown-toggle pull-right" type="button" id="chosenLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
           Translate
         </button>
+		<div id="google_translate_element"></div>
       </div>
       <h1 class="display-4">Welcome to QUT's multilingual noticeboard!</h1>
       <hr/>
@@ -27,7 +29,7 @@
 
 
       <div class="form-popup" id="createNoticeboardPost" style="width: 50%;">
-        <form class="form-container" style="width:100%;" method="POST" action="newpost">
+        <form class="form-container" style="width:100%;" method="POST" action="newvid">
           <h1>Write on the noticeboard</h1>
           <div class="column">
             <div class="row">
@@ -121,3 +123,13 @@
     }
   }
 </script>
+
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</html>

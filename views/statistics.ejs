@@ -1,3 +1,61 @@
+<script src="https://cdn.plot.ly/plotly-latest.min.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+</style>
+</head>
+
+
 <div class="container-fluid padding">
 <div class="row welcome text-center">
 	<div class="col-12">
@@ -12,6 +70,56 @@
 		<div>
 			<p class="lead">This page will show user statistics such as number of uploaded posts, active users, user genders etc.</p>
 		</div>
+		
+		<div class="tab">
+		  <button class="tablinks" onclick="openCity(event, 'States')">User States</button>
+		  <button class="tablinks" onclick="openCity(event, 'Gender')">User Genders</button>
+		</div>
+
+		<div id="States" class="tabcontent">
+		  <div id="myDiv"></div>
+		</div>
+
+		<div id="Gender" class="tabcontent">
+		  <div id="myDiv1"></div>
+		</div>
+		
+		
 	</div>
 </div>
 </div>
+
+<script>
+	var data = [{
+		values: [<%= counts_states[0] %>, <%= counts_states[1] %>, <%= counts_states[2] %>, <%= counts_states[3] %>, <%= counts_states[4] %>, <%= counts_states[5] %>, <%= counts_states[6] %>],
+		labels: ["QLD", "NSW", "VIC", "SA", "WA", "NT", "TAS"],
+		type: 'pie'
+	}];
+
+	Plotly.newPlot('myDiv', data, {}, {showSendToCloud:true});
+	
+	
+	var data1 = [{
+		values: [<%= gender_counts[0] %>, <%= gender_counts[1] %>],
+		labels: ["Male", "Female"],
+		type: 'pie'
+	}];
+
+	Plotly.newPlot('myDiv1', data1, {}, {showSendToCloud:true});
+</script>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>

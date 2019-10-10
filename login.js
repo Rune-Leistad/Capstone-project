@@ -46,7 +46,7 @@ app.get('/style.css', function(request, response) {
 
 
 app.get('/home', function(request, response) {
-    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id', function(error, results, fields) {
+    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id  ORDER BY post_id DESC', function(error, results, fields) {
         if(error)
             console.log(error.message);
         else {
@@ -60,7 +60,12 @@ app.get('/home', function(request, response) {
 });
 
 app.get('/chat', function(request, response) {
-	 response.render('chat', {page_name: 'chat', u_name: request.session.username, logged_in: request.session.loggedin});
+	if (request.session.loggedin) {
+		response.render('chat', {page_name: 'chat', u_name: request.session.username, logged_in: request.session.loggedin});
+	} else {
+		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
+	}
+	 
 });
 
 app.get('/games', function(request, response) {
@@ -76,15 +81,92 @@ app.get('/register', function(request, response) {
 });
 
 app.get('/statistics', function(request, response) {
-	response.render('statistics', {page_name: 'statistics', u_name: request.session.username, logged_in: request.session.loggedin});
+	//response.render('statistics', {page_name: 'statistics', u_name: request.session.username, logged_in: request.session.loggedin});
+	
+	con.query('SELECT user_gender, user_state FROM user_information.log_in_data', function(error, results, fields) {
+        if(error)
+            console.log(error.message);
+        else {
+			
+			var states = ["QLD", "NSW", "VIC", "SA", "WA", "NT", "TAS"];
+			var counts_states = [0, 0, 0, 0, 0, 0, 0];
+			var genders = ["Male", "Female"];
+			var gender_counts = [0, 0];
+			
+			for (var i = 0; i < results.length; i++) {
+				switch (results[i].user_state){
+					case "QLD":
+						counts_states[0] += 1;
+						break;
+					case "NSW":
+						counts_states[1] += 1;
+						break;
+					case "VIC":
+						counts_states[2] += 1;
+						break;
+					case "SA":
+						counts_states[3] += 1;
+						break;
+					case "WA":
+						counts_states[4] += 1;
+						break;
+					case "NT":
+						counts_states[5] += 1;
+						break;
+					case "TAS":
+						counts_states[6] += 1;
+						break;
+				}
+				switch (results[i].user_gender) {
+					case "Male":
+						gender_counts[0] += 1;
+						break;
+					case "Female":
+						gender_counts[1] += 1;
+						break;
+				}
+			}
+			
+			
+			
+			
+            console.log(results);
+            response.render('statistics', {page_name: 'statistics',
+                                logged_in: request.session.loggedin,
+                                u_id: request.session.userid,
+                                u_name: request.session.username,
+                                states: states,
+								counts_states: counts_states,
+								genders: genders,
+								gender_counts: gender_counts});
+        }
+    });
 });
 
 app.get('/tutor-request', function(request, response) {
-	response.render('tutor-request', {page_name: 'tutor-request', u_name: request.session.username, logged_in: request.session.loggedin});
+	if (request.session.loggedin) {
+		response.render('tutor-request', {page_name: 'tutor-request', u_name: request.session.username, logged_in: request.session.loggedin});
+	} else {
+		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
+	}
+	
 });
 
 app.get('/video', function(request, response) {
-	response.render('video', {page_name: 'video', u_name: request.session.username, logged_in: request.session.loggedin});
+	//response.render('video', {page_name: 'video', u_name: request.session.username, logged_in: request.session.loggedin});
+	
+	
+	con.query('SELECT * FROM user_information.videos JOIN user_information.log_in_data ON videos.uploaders_id=log_in_data.user_id WHERE videos.approved = 1 ORDER BY video_id DESC', function(error, results, fields) {
+        if(error)
+            console.log(error.message);
+        else {
+            response.render('video', {page_name: 'video',
+                                logged_in: request.session.loggedin,
+                                u_id: request.session.userid,
+                                u_name: request.session.username,
+                                posts: results});
+        }
+    });
 });
 
 app.get('/changepass', function(request, response) {
@@ -114,9 +196,6 @@ app.post('/auth', function(request, response) {
 	var username = request.body.username;
 	var password = request.body.password;
 	if (username && password) {
-        con.connect(function(err) {
-            console.log(err);
-        });
 		con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ? AND user_password = ?', [username, password], function(error, results, fields) {
 			if (results.length > 0) {
 
@@ -134,6 +213,15 @@ app.post('/auth', function(request, response) {
 		response.send('Please enter Username and Password!');
 		response.end();
 	}
+});
+
+
+app.post('/tutorrequest', function(request, response) {
+	con.query('INSERT INTO `user_information`.`tutor_requests` (`student_id`, `subject`, `request_info`) VALUES (?, ?, ?);', [request.session.userid, request.body.subject, request.body.request], function(error, results, fields){
+		console.log(error);
+	});
+	console.log("Added to table")
+	response.redirect("/tutor-request");
 });
 
 
@@ -169,6 +257,13 @@ app.post('/newpost', function(request, response) {
     con.query('INSERT INTO `user_information`.`forum_posts` (`user_id`, `post_language`, `post_topic`, `post_content`, `post_views`) VALUES (?, "ENG", ?, ?, "0");', [request.session.userid, request.body.topic, request.body.content], function(error, results, fields){console.log(error)});
     console.log("Noticeboard post successfully saved");
     response.redirect("/home");
+});
+
+
+app.post('/newvid', function(request, response) {
+    con.query('INSERT INTO `user_information`.`videos` (`uploaders_id`, `title`, `url`, `approved`) VALUES (?, ?, ?, 0);', [request.session.userid, request.body.title, request.body.url], function(error, results, fields){console.log(error)});
+    console.log("New video post successfully saved");
+    response.redirect("/video");
 });
 
 app.get('/getFeatured', function(request, response) {

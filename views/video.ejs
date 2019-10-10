@@ -12,6 +12,73 @@
 		<div>
 			<p class="lead">Here users can share funny and educational videos with other users</p>
 		</div>
+		
+		<% if(logged_in) { %>
+		  <button type="button" class="open-button fa fa-plus fa-2x" onclick="openForm()"></button>
+		  <% } %>
+		
+		
+		<div class="form-popup" id="createNoticeboardPost" style="width: 50%;">
+			<form class="form-container" style="width:100%;" method="POST" action="newvid">
+			  <h1>Upload an interesting video!</h1>
+			  <div class="column">
+				<div class="row">
+				  <label for="email"><b>Video Title</b></label>
+				</div>
+				<div class="row">
+				  <input type="text" name="title" id="postTitle" required="true" />
+						  </div>
+				<div class="row">
+				  <label for="content"><b>Youtube URL</b></label>
+				</div>
+				<div class="row">
+				  <input type="text" name="url" id="content" required="true" />
+						  </div>
+				<div class="row" style="float: right;">
+				  <button type="submit" class="btn-primary" value="Click here to submit your video">Post</button>
+				  <button type="submit" class="btn-grey" onclick="closeForm()">Close</button>
+				</div>
+			  </div>
+			</form>
+		  </div>
+		  <script>
+			function openForm() {
+			document.getElementById("createNoticeboardPost").style.display = "block";
+			}
+			function closeForm() {
+			document.getElementById("createNoticeboardPost").style.display = "none";
+			}
+		  </script>
+		
+		 <% for(var i=0; i < posts.length; i++) { %>
+          <div class="card-group text-center" onclick="showPost('showMore<%= (i+1) %>')">
+            <div class="card col-lg-1" style="background-color:lightgrey">
+                <% if(posts[i].user_gender == "Male") { %>
+                  <img src="img/male-std-profile.png" id="profileImg" />
+                <% } else { %>
+                  <img src="img/female-std-profile.png" id="profileImg" />
+                <% } %>
+                <p><%= posts[i].user_name %></p>
+            </div>
+            <div class="card col-lg-11" style="padding: 0">
+                <div class="card-header bg-primary text-center text-white">
+                  <p><%= posts[i].title %><p>
+                </div>
+                <div class="card-body">
+					<iframe width="560" height="315" src="<%= posts[i].url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      
+                    </p>
+                    <% if(posts[i].user_id == u_id) { %>
+                        <button class="btn fa fa-edit pull-right" type="button" id="editPost"></button>
+                    <% } %>
+                    <span id="showMore<%= (i+1) %>" style="display: none;">
+                      Heeeeellooooooooo
+                    </span>
+                </div>
+              </div>
+            </div>
+          <% } %>
+		
 	</div>
 </div>
 </div>
