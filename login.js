@@ -26,7 +26,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-    response.render('home');
+    con.query('SELECT * FROM user_information.forum_posts JOIN user_information.log_in_data ON forum_posts.user_id=log_in_data.user_id', function(error, results, fields) {
+        if(error)
+            console.log(error.message);
+        else {
+            response.render('home', {page_name: 'home',
+                                logged_in: request.session.loggedin,
+                                u_id: request.session.userid,
+                                u_name: request.session.username,
+                                posts: results});
+        }
+    });
 });
 
 
@@ -43,45 +53,61 @@ app.get('/home', function(request, response) {
             response.render('home', {page_name: 'home',
                                 logged_in: request.session.loggedin,
                                 u_id: request.session.userid,
+                                u_name: request.session.username,
                                 posts: results});
         }
     });
 });
 
 app.get('/chat', function(request, response) {
-	 response.render('chat', {page_name: 'chat', logged_in: request.session.loggedin});
+	 response.render('chat', {page_name: 'chat', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/games', function(request, response) {
-	response.render('games', {page_name: 'games', logged_in: request.session.loggedin});
+	response.render('games', {page_name: 'games', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/learning-materials', function(request, response) {
-	response.render('learning-materials', {page_name: 'learning-materials', logged_in: request.session.loggedin});
+	response.render('learning-materials', {page_name: 'learning-materials', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/register', function(request, response) {
-	response.render('register', {page_name: 'register', logged_in: request.session.loggedin});
+	response.render('register', {page_name: 'register', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/statistics', function(request, response) {
-	response.render('statistics', {page_name: 'statistics', logged_in: request.session.loggedin});
+	response.render('statistics', {page_name: 'statistics', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/tutor-request', function(request, response) {
-	response.render('tutor-request', {page_name: 'tutor-request', logged_in: request.session.loggedin});
+	response.render('tutor-request', {page_name: 'tutor-request', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/video', function(request, response) {
-	response.render('video', {page_name: 'video', logged_in: request.session.loggedin});
+	response.render('video', {page_name: 'video', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/changepass', function(request, response) {
-	response.render('changepass', {page_name: 'changepass', logged_in: request.session.loggedin});
+	response.render('changepass', {page_name: 'changepass', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/login', function(request, response) {
-	response.render('login', {page_name: 'login', logged_in: request.session.loggedin});
+	response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
+});
+
+app.get('/profile', function(request, response) {
+    con.query('SELECT * FROM user_information.log_in_data WHERE log_in_data.user_id = ?',[request.session.userid], function(error, results, fields) {
+        if(error)
+            console.log(error.message);
+        else {
+            console.log(results);
+            response.render('profile', {page_name: 'profile',
+                                logged_in: request.session.loggedin,
+                                u_id: request.session.userid,
+                                u_name: request.session.username,
+                                user_data: results});
+        }
+    });
 });
 
 app.post('/auth', function(request, response) {
@@ -115,7 +141,7 @@ app.post('/auth', function(request, response) {
 app.post('/reg', function(request, response) {
     con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ?;',[request.body.email], function(error, results, fields){
         if(results.length < 1) {
-            con.query('INSERT INTO `user_information`.`log_in_data` (`user_name`, `user_email`, `user_password`, `user_secQ`, `user_secQAns`, `user_state`, `user_gender`, `user_phone`) VALUES (?, ?, ?, ?, ?, ?, "Male", ?);', [request.body.firstname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.phone], function(error, results, fields){
+            con.query('INSERT INTO user_information.log_in_data (user_name, user_last_name, user_email, user_password, user_secQ, user_secQAns, user_state, user_gender, user_phone) VALUES (?, ?, ?, ?, ?, ?, ?, "Male", ?);', [request.body.firstname, request.body.lastname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.phone], function(error, results, fields){
                 request.session.loggedin = true;
               	request.session.username = request.body.email;
               	response.redirect("/home");
@@ -157,14 +183,17 @@ app.get('/getFeatured', function(request, response) {
     });
 });
 
-app.get('/home', function(request, response) {
-	if (request.session.loggedin) {
-		request.method = 'get';
-		response.render('home');
-	} else {
-		response.send('Please login to view this page!');
-	}
-	response.end();
+app.get('/logout', function(request, response, next) {
+  if (request.session) {
+    // delete session object
+    request.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return response.redirect('/');
+      }
+    });
+  }
 });
 
 

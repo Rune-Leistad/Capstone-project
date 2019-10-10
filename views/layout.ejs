@@ -58,7 +58,16 @@
                     <% if (!logged_in) { %>
         			  <a href="login"><button class="btn btn-primary active" type="button">Login</button></a>
                     <% } else { %>
-                      <a href="#"><button class="btn btn-primary active" type="button">Log out</button></a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <%= u_name %>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/profile">Profile</a>
+                                <hr/>
+                                <a class="dropdown-item" href="/logout">Log out</a>
+                            </div>
+                        </div>
                     <% } %>
 				  </li>
 				</ul>
