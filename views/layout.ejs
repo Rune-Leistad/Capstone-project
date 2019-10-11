@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-us">
     <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
@@ -70,6 +70,9 @@
                         </div>
                     <% } %>
 				  </li>
+                  <li>
+            		<div class="dropdown" id="google_translate_element" style="margin-left: 15px; margin-right: 15px; margin-top: 5px;"></div>
+                  </li>
 				</ul>
 			</div>
 		</div>
@@ -119,7 +122,12 @@
 				</div>
 			</div>
 		</footer>
-
-
     </body>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </html>

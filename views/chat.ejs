@@ -1,14 +1,25 @@
 <div class="container-fluid padding">
 	<div class="row welcome text-center">
 		<div class="col-12">
-			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
-				Translate
-				</button>
-			</div>
 			<h1 class="display-4">Chat page</h1>
 			<hr>
-				
+
+
+			<nav class="navbar navbar-expand-md navbar-light bg-primary" id="nav-people">
+				<div class="container-fluid">
+					<div class="collapse navbar-collapse col-lg-6" id="chatNav">
+						<ul class="navbar-nav ml-auto">
+							<% for(var i = 0; i < users.length; i++) { %>
+	  						<li style="margin-right: 10px; text-align: center;">
+								<button class="btn btn-default" type="button" name="button"><%= users[i].user_name %></button>
+							</li>
+	  						<% } %>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+
 			<script>
 			(function(t,a,l,k,j,s){
 			s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.head.appendChild(s)
@@ -21,11 +32,14 @@
 
 			<!-- TalkJS initialization code, which we'll customize in the next steps -->
 			<script>
+			var me_id = "<%= u_id %>";
+			var me_name = "<%= u_name %>";
+			var me_email = "<%= u_email %>";
 			Talk.ready.then(function() {
 				var me = new Talk.User({
-					id: "1",
-					name: "Taylor",
-					email: "taylordanielgreen@gmail.com",
+					id: me_id,
+					name: me_name,
+					email: me_email,
 					welcomeMessage: "Hey there! How are you? :-)"
 				});
 				window.talkSession = new Talk.Session({

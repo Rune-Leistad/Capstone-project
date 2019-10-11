@@ -1,23 +1,18 @@
 <div class="container-fluid padding">
 <div class="row welcome text-center">
 	<div class="col-12">
-		<div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
-			Translate
-			</button>
-		</div>
 		<h1 class="display-4">Video</h1>
 		<hr>
-				
+
 		<div>
 			<p class="lead">Here users can share funny and educational videos with other users</p>
 		</div>
-		
+
 		<% if(logged_in) { %>
 		  <button type="button" class="open-button fa fa-plus fa-2x" onclick="openForm()"></button>
 		  <% } %>
-		
-		
+
+
 		<div class="form-popup" id="createNoticeboardPost" style="width: 50%;">
 			<form class="form-container" style="width:100%;" method="POST" action="newvid">
 			  <h1>Upload an interesting video!</h1>
@@ -49,7 +44,7 @@
 			document.getElementById("createNoticeboardPost").style.display = "none";
 			}
 		  </script>
-		
+
 		 <% for(var i=0; i < posts.length; i++) { %>
           <div class="card-group text-center" onclick="showPost('showMore<%= (i+1) %>')">
             <div class="card col-lg-1" style="background-color:lightgrey">
@@ -66,7 +61,7 @@
                 </div>
                 <div class="card-body">
 					<iframe width="560" height="315" src="<%= posts[i].url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      
+
                     </p>
                     <% if(posts[i].user_id == u_id) { %>
                         <button class="btn fa fa-edit pull-right" type="button" id="editPost"></button>
@@ -78,7 +73,7 @@
               </div>
             </div>
           <% } %>
-		
+
 	</div>
 </div>
 </div>
