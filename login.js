@@ -273,10 +273,14 @@ app.post('/reg', function(request, response) {
 // Update password
 app.post('/chng',
         [check('username', 'Email is invalid').isEmail(),
-        check('password', 'Password mismatch').matches('passwordCheck'),],
-        function(request, response) {
+        check('passwordCheck').custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Password confirmation does not match password');
+            }
 
-      //check validate data
+            return true;
+      })], (request, response) => {
+              //check validate data
     const result= validationResult(request);
     var errors = result.errors;
     for (var key in errors) {
@@ -294,7 +298,6 @@ app.post('/chng',
             response.redirect("/");
         });
     }
-
 });
 
 // Creating noticeboard posts
