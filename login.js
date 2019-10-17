@@ -94,7 +94,18 @@ app.post('/chooseChat', function(request, response) {
 });
 
 app.get('/games', function(request, response) {
-	response.render('games', {page_name: 'games', u_name: request.session.username, logged_in: request.session.loggedin});
+	response.render('games', {page_name: 'games',
+                                u_name: request.session.username,
+                                logged_in: request.session.loggedin,
+                                game: 'none'});
+});
+
+app.post('/games', function(request, response) {
+    console.log(request.body.gameChoose);
+	response.render('games', {page_name: 'games',
+                                u_name: request.session.username,
+                                logged_in: request.session.loggedin,
+                                game: request.body.gameChoose});
 });
 
 app.get('/learning-materials', function(request, response) {
@@ -207,7 +218,6 @@ app.get('/profile', function(request, response) {
         if(error)
             console.log(error.message);
         else {
-            console.log(results);
             response.render('profile', {page_name: 'profile',
                                 logged_in: request.session.loggedin,
                                 u_id: request.session.userid,

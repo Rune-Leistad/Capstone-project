@@ -57,9 +57,34 @@
 	</div>
 </div>
 
-<div class="center-class">
-	<button type="button" class="collapsible">Fish Need Water</button>
-	<div class="content">
-		<embed width="660" height="480" base="https://external.kongregate-games.com/gamez/0009/9205/live/" src="https://external.kongregate-games.com/gamez/0009/9205/live/embeddable_99205.swf" type="application/x-shockwave-flash"></embed><br/>
+<form class="center-class" name="gamesForm" action="/games" method="post">
+	<input class="collapsible" style="border-bottom: 1px solid" type="submit" name="gameChoose" value="cats1010" />
+	<% if(game == 'cats1010') { %>
+	<div>
+		<script src="https://cdn.htmlgames.com/embed.js?game=Cats1010&amp;&amp;bgcolor=white" widht="300" height="300"></script>
 	</div>
-</div>
+	<% } %>
+
+	<input class="collapsible" style="border-bottom: 1px solid" type="submit" name="gameChoose" value="KillerSudoku" />
+	<% if(game == 'KillerSudoku') { %>
+	<div>
+		<script src="https://cdn.htmlgames.com/embed.js?game=KillerSudoku&amp;&amp;bgcolor=white"></script>
+	</div>
+	<% } %>
+
+	<input class="collapsible" style="border-bottom: 1px solid" type="submit" name="gameChoose" value="rapidMath" />
+	<% if(game == 'rapidMath') { %>
+	<div>
+		<script src="https://cdn.htmlgames.com/embed.js?game=RapidMath&amp;&amp;bgcolor=white"></script>
+	</div>
+	<% } %>
+
+	<input class="collapsible" style="border-bottom: 1px solid" type="submit" name="gameChoose" value="mathFun" />
+	<% if(game == 'mathFun') { %>
+	<div>
+		<script src="https://cdn.htmlgames.com/embed.js?game=MathFun&amp;&amp;bgcolor=white"></script>
+	</div>
+	<% } %>
+
+
+</form>
