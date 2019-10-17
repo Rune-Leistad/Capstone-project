@@ -20,6 +20,7 @@
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
-    "express-layouts": "^1.0.0"
+    "express-layouts": "^1.0.0",
+    "express-validator": "^6.2.0"
   }
 }

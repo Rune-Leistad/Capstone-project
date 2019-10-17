@@ -4,20 +4,24 @@
 			<h1 class="display-4">Chat page</h1>
 			<hr>
 
-
 			<nav class="navbar navbar-expand-md navbar-light bg-primary" id="nav-people">
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse col-lg-6" id="chatNav">
+
 						<ul class="navbar-nav ml-auto">
 							<% for(var i = 0; i < users.length; i++) { %>
 	  						<li style="margin-right: 10px; text-align: center;">
-								<button class="btn btn-default" type="button" name="button"><%= users[i].user_name %></button>
+								<form action="chooseChat" method="post">
+									<button type="submit" name="id" value="<%= users[i].user_id %>"><%= users[i].user_name %></button>
+								</form>
 							</li>
 	  						<% } %>
 						</ul>
+
 					</div>
 				</div>
 			</nav>
+
 
 
 			<script>
@@ -35,6 +39,17 @@
 			var me_id = "<%= u_id %>";
 			var me_name = "<%= u_name %>";
 			var me_email = "<%= u_email %>";
+			var other_id, other_name, other_email;
+			if(<%= u_id %> == <%= other.user_id %>) {
+				other_id = "1";
+				other_name = "Sebastian";
+				other_email = "Sebastian@example.com";
+			} else {
+				other_id = "<%= other.user_id %>";
+				other_name = "<%= other.user_name %>";
+				other_email = "<%= other.user_email %>";
+			}
+
 			Talk.ready.then(function() {
 				var me = new Talk.User({
 					id: me_id,
@@ -47,9 +62,9 @@
 					me: me
 				});
 				var other = new Talk.User({
-					id: "2",
-					name: "Sebastian",
-					email: "Sebastian@example.com",
+					id: other_id,
+					name: other_name,
+					email: other_email,
 					photoUrl: "https://demo.talkjs.com/img/sebastian.jpg",
 					welcomeMessage: "Hey, how can I help?"
 				});

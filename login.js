@@ -7,6 +7,8 @@ var app = express();
 var router = express.Router();
 var expressLayouts = require('express-ejs-layouts');
 
+const {check,validationResult} = require('express-validator');
+
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -68,12 +70,27 @@ app.get('/chat', function(request, response) {
                                     u_name: request.session.username,
                                     u_email: request.session.email,
                                     logged_in: request.session.loggedin,
+                                    other: {user_id: request.session.userid,
+                                            u_name: request.session.username,
+                                            u_email: request.session.email},
                                     users: results});
             });
 	} else {
 		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
 	}
 
+});
+
+app.post('/chooseChat', function(request, response) {
+    con.query('SELECT * FROM user_information.log_in_data WHERE log_in_data.user_id = ?', [request.body.id], function(error, results, fields) {
+        response.render('chat', {page_name: 'chat',
+                                u_id: request.session.userid,
+                                u_name: request.session.username,
+                                u_email: request.session.email,
+                                logged_in: request.session.loggedin,
+                                other: result[0],
+                                users: results});
+    });
 });
 
 app.get('/games', function(request, response) {
@@ -254,11 +271,30 @@ app.post('/reg', function(request, response) {
 });
 
 // Update password
-app.post('/chng', function(request, response) {
-	con.query('UPDATE `user_information`.`log_in_data` SET `user_password` = ? WHERE (`user_email` = ? AND `user_secQAns` = ?);', [request.body.password, request.body.username, request.body.answer], function(error, results, fields){});
-	request.session.loggedin = true;
-	request.session.email = request.body.email;
-	response.redirect("/home");
+app.post('/chng',
+        [check('username', 'Email is invalid').isEmail(),
+        check('password', 'Password mismatch').matches('passwordCheck'),],
+        function(request, response) {
+
+      //check validate data
+    const result= validationResult(request);
+    var errors = result.errors;
+    for (var key in errors) {
+        console.log(errors[key].value);
+    }
+    if (!result.isEmpty()) {
+        //response validate data to changepass.ejs
+        response.render('changepass', {page_name: 'login',
+                                    u_name: request.session.username,
+                                    logged_in: request.session.loggedin,
+                                    errors: errors});
+    }
+    else  {
+        con.query('UPDATE `user_information`.`log_in_data` SET `user_password` = ? WHERE (`user_email` = ? AND `user_secQAns` = ?);', [request.body.password, request.body.username, request.body.answer], function(error, results, fields){
+            response.redirect("/");
+        });
+    }
+
 });
 
 // Creating noticeboard posts

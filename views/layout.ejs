@@ -54,9 +54,14 @@
                     <% if (page_name === 'statistics') { %>class="nav-item active" <% } %> >
                     <a class="nav-link" href="/statistics">Statistics</a>
                   </li>
-        					<li>
+
                     <% if (!logged_in) { %>
+                    <li>
         			  <a href="login"><button class="btn btn-primary active" type="button">Login</button></a>
+                    </li>
+                    <li>
+                        <a href="register"><button class="btn btn-primary active" type="button">Register</button></a>
+                    </li>
                     <% } else { %>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,7 +74,6 @@
                             </div>
                         </div>
                     <% } %>
-				  </li>
                   <li>
             		<div class="dropdown" id="google_translate_element" style="margin-left: 15px; margin-right: 15px; margin-top: 5px;"></div>
                   </li>

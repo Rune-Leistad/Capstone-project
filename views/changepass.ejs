@@ -1,34 +1,47 @@
 <div class="container-fluid padding">
-<div class="row welcome text-center">
-	<div class="col-12">
-		<div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
-			Translate
-			</button>
-		</div>
-		<h1 class="display-4">Update your password</h1>
-		<hr>
+	<div class="row welcome text-center">
+		<div class="col-12">
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
+				Translate
+				</button>
+			</div>
+			<h1 class="display-4">Update your password</h1>
+			<hr>
 			<form action = "chng" method="POST">
 				<div class="row login-form justify-content-lg-center">
-						
+
 					<div class="col-lg-5">
 						<div class="form-group">
-							<input type="email" name="username" class="form-control" placeholder="Email" value="" />
+							<input type="email" name="username" class="form-control" placeholder="Email" value="" required/>
 						</div>
 						<div class="form-group">
-							<input type="text" name="answer" class="form-control" placeholder="Security Question Answer" value="" />
+							<input type="text" name="answer" class="form-control" placeholder="Security Question Answer" value="" required/>
 						</div>
 						<div class="form-group">
-							<input type="password" name="password" class="form-control" placeholder="New Password" value="" />
+							<input type="password" name="password" class="form-control" placeholder="New Password" value="" required/>
 						</div>
 						<div class="form-group">
-							<input type="password" name="passwordCheck" class="form-control" placeholder="Repeat Password" value="" />
+							<input type="password" name="passwordCheck" class="form-control" placeholder="Repeat Password" value="" required/>
 						</div>
-								
-						<input type="submit" class="btnLogIn"  value="Submit"/>
+
+						<input type="submit" class="btnLogIn"  value="Submit" />
+
+						<% if (locals.errors) { %>
+						<ul>
+							<% Object.values(errors).forEach(function(error){ %>
+								<li>
+									<div class="alert alert-danger" role="alert">
+										<%= error.msg %>
+									</div>
+								</li>
+							<% }); %>
+						</ul>
+						<% } %>
 					</div>
-				</form>
-            </div>	
+				</div>
+			</form>
+
+		</div>
 	</div>
-</div>
 </div>
