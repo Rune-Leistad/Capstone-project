@@ -101,7 +101,6 @@ app.get('/games', function(request, response) {
 });
 
 app.post('/games', function(request, response) {
-    console.log(request.body.gameChoose);
 	response.render('games', {page_name: 'games',
                                 u_name: request.session.username,
                                 logged_in: request.session.loggedin,
@@ -163,10 +162,6 @@ app.get('/statistics', function(request, response) {
 				}
 			}
 
-
-
-
-            console.log(results);
             response.render('statistics', {page_name: 'statistics',
                                 logged_in: request.session.loggedin,
                                 u_id: request.session.userid,
@@ -210,7 +205,7 @@ app.get('/changepass', function(request, response) {
 });
 
 app.get('/login', function(request, response) {
-	response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
+	response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin, error_msg: 0});
 });
 
 app.get('/profile', function(request, response) {
@@ -241,7 +236,11 @@ app.post('/auth', function(request, response) {
                 request.session.userid = results[0].user_id; // results[0] should always be the logged in user
 				response.redirect("/home");
 			} else {
-				response.send('Incorrect Username and/or Password!');
+				response.render('login',
+                                {page_name: 'login',
+                                u_name: request.session.username,
+                                logged_in: request.session.loggedin,
+                                error_msg: 'Email or password is incorrect.'});
 			}
 			response.end();
 		});

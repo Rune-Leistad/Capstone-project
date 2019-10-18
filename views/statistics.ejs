@@ -59,18 +59,13 @@
 <div class="container-fluid padding">
 <div class="row welcome text-center">
 	<div class="col-12">
-		<div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle pull-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="float: right;">
-			Translate
-			</button>
-		</div>
 		<h1 class="display-4">Statistics page!</h1>
 		<hr>
-				
+
 		<div>
 			<p class="lead">This page will show user statistics such as number of uploaded posts, active users, user genders etc.</p>
 		</div>
-		
+
 		<div class="tab">
 		  <button class="tablinks" onclick="openCity(event, 'States')">User States</button>
 		  <button class="tablinks" onclick="openCity(event, 'Gender')">User Genders</button>
@@ -83,8 +78,8 @@
 		<div id="Gender" class="tabcontent">
 		  <div id="myDiv1"></div>
 		</div>
-		
-		
+
+
 	</div>
 </div>
 </div>
@@ -97,8 +92,8 @@
 	}];
 
 	Plotly.newPlot('myDiv', data, {}, {showSendToCloud:true});
-	
-	
+
+
 	var data1 = [{
 		values: [<%= gender_counts[0] %>, <%= gender_counts[1] %>],
 		labels: ["Male", "Female"],
