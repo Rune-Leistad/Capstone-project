@@ -76,19 +76,31 @@ app.get('/chat', function(request, response) {
                                     users: results});
             });
 	} else {
-		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
+		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin, error_msg: 0});
 	}
 
 });
 
-app.post('/chooseChat', function(request, response) {
-    con.query('SELECT * FROM user_information.log_in_data WHERE log_in_data.user_id = ?', [request.body.id], function(error, results, fields) {
+app.post('/chat', function(request, response) {
+    con.query('SELECT * FROM user_information.log_in_data', function(error, results, fields) {
+        var reqUserAt = 0;
+        var selfUserAt = 0;
+        // Finding array index of user of which to initate chat with
+        for(var i = 0; i < results.length; i++) {
+            if(results[i].user_id == request.body.id)
+                reqUserAt = i;
+            else if(results[i].user_id == request.session.userid) {
+                selfUserAt = i;
+            }
+        }
+        var otherUser = results.splice(reqUserAt, 1);
+        results.splice(selfUserAt, 1);
         response.render('chat', {page_name: 'chat',
                                 u_id: request.session.userid,
                                 u_name: request.session.username,
                                 u_email: request.session.email,
                                 logged_in: request.session.loggedin,
-                                other: result[0],
+                                other: otherUser,
                                 users: results});
     });
 });
@@ -178,7 +190,7 @@ app.get('/tutor-request', function(request, response) {
 	if (request.session.loggedin) {
 		response.render('tutor-request', {page_name: 'tutor-request', u_name: request.session.username, logged_in: request.session.loggedin});
 	} else {
-		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin});
+		response.render('login', {page_name: 'login', u_name: request.session.username, logged_in: request.session.loggedin, error_msg: 0});
 	}
 
 });
@@ -250,7 +262,6 @@ app.post('/auth', function(request, response) {
 	}
 });
 
-
 app.post('/tutorrequest', function(request, response) {
 	con.query('INSERT INTO `user_information`.`tutor_requests` (`student_id`, `subject`, `request_info`) VALUES (?, ?, ?);', [request.session.userid, request.body.subject, request.body.request], function(error, results, fields){
 		console.log(error);
@@ -264,17 +275,30 @@ app.post('/tutorrequest', function(request, response) {
 app.post('/reg', function(request, response) {
     con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ?;',[request.body.email], function(error, results, fields){
         if(results.length < 1) {
-            con.query('INSERT INTO user_information.log_in_data (user_name, user_last_name, user_email, user_password, user_secQ, user_secQAns, user_state, user_gender, user_phone) VALUES (?, ?, ?, ?, ?, ?, ?, "Male", ?);', [request.body.firstname, request.body.lastname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.phone], function(error, results, fields){
+            con.query('INSERT INTO user_information.log_in_data (user_name, user_last_name, user_email, user_password, user_secQ, user_secQAns, user_state, user_gender, user_phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',
+                        [request.body.firstname, request.body.lastname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.gender, request.body.phone],
+                        function(error, results, fields){
+                var user;
+                con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ?', [request.body.email]), function(error, results, fields){
+                    user = results;
+                }
+
                 request.session.loggedin = true;
-              	request.session.email = request.body.email;
-              	response.redirect("/home");
+                request.session.username = request.body.firstname;
+                request.session.email = request.body.email;
+                request.session.userid = user.user_id; // results[0] should always be the logged in user
+                response.render('home', {page_name: 'home',
+                                    logged_in: request.session.loggedin,
+                                    u_id: request.session.userid,
+                                    u_name: request.session.username,
+                                    posts: results});
             });
         }
         else {
             console.log("Email is already in use.");
             request.session.loggedin = false;
             request.session.email = "";
-            response.redirect("/home");
+            response.redirect('home');
         }
     });
 });
@@ -297,7 +321,7 @@ app.post('/chng',
     }
     if (!result.isEmpty()) {
         //response validate data to changepass.ejs
-        response.render('changepass', {page_name: 'login',
+        response.render('changepass', {page_name: 'changepass',
                                     u_name: request.session.username,
                                     logged_in: request.session.loggedin,
                                     errors: errors});

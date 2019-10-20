@@ -11,7 +11,7 @@
 						<ul class="navbar-nav ml-auto">
 							<% for(var i = 0; i < users.length; i++) { %>
 	  						<li style="margin-right: 10px; text-align: center;">
-								<form action="chooseChat" method="post">
+								<form action="chat" method="post">
 									<button type="submit" name="id" value="<%= users[i].user_id %>"><%= users[i].user_name %></button>
 								</form>
 							</li>
