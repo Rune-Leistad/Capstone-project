@@ -62,6 +62,7 @@ app.get('/home', function(request, response) {
     });
 });
 
+
 app.get('/chat', function(request, response) {
 	if (request.session.loggedin) {
         con.query('SELECT * FROM user_information.log_in_data WHERE log_in_data.user_id != ?;', [request.session.userid], function(error, results, fields) {
