@@ -294,35 +294,26 @@ app.post('/tutorrequest', function(request, response) {
 
 
 // Register user
-app.post('/reg', function(request, response) {
-    con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ?;',[request.body.email], function(error, results, fields){
-        if(results.length < 1) {
-            con.query('INSERT INTO user_information.log_in_data (user_name, user_last_name, user_email, user_password, user_secQ, user_secQAns, user_state, user_gender, user_phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',
-                        [request.body.firstname, request.body.lastname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.gender, request.body.phone],
-                        function(error, results, fields){
-                var user;
-                con.query('SELECT * FROM user_information.log_in_data WHERE user_email = ?', [request.body.email]), function(error, results, fields){
-                    user = results;
-                }
+/*app.post('/reg', function(request, response) {
+	con.query('INSERT INTO user_information.log_in_data (user_name, user_last_name, user_email, user_password, user_secQ, user_secQAns, user_state, user_gender, user_phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',[request.body.firstname, request.body.lastname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.gender, request.body.phone], function(error, results, fields){
+		console.log(request.body);
+		response.render('login', {page_name: 'login', 
+								u_name: request.session.username, 
+								logged_in: request.session.loggedin, 
+								error_msg: 0});
 
-                request.session.loggedin = true;
-                request.session.username = request.body.firstname;
-                request.session.email = request.body.email;
-                request.session.userid = user.user_id; // results[0] should always be the logged in user
-                response.render('home', {page_name: 'home',
-                                    logged_in: request.session.loggedin,
-                                    u_id: request.session.userid,
-                                    u_name: request.session.username,
-                                    posts: results});
-            });
-        }
-        else {
-            console.log("Email is already in use.");
-            request.session.loggedin = false;
-            request.session.email = "";
-            response.redirect('home');
-        }
-    });
+	});
+}); */
+
+app.post('/reg', function(request, response) {
+	con.query('INSERT INTO `user_information`.`log_in_data` (`user_name`, `user_email`, `user_password`, `user_secQ`, `user_secQAns`, `user_state`, `user_gender`, `user_phone`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [request.body.firstname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.gender ,request.body.phone], function(error, results, fields){});
+	request.session.loggedin = true;
+	request.session.username = request.body.firstname;
+	response.render('login',
+					{page_name: 'login',
+					u_name: "",
+					logged_in: false,
+					error_msg: 0});
 });
 
 // Update password
