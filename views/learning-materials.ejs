@@ -10,6 +10,19 @@
 			of plugin and provde the user of the site with a manual of how to use it
 			them selves.</p>
 		</div>
+		
+		<h3>Documents available for download:</h3>
+		
+		<% if(logged_in) { %>
+		<form action="download" method="post">
+		<% for(var i=0; i < file_names.length; i++) { %>
+		<button type="submit" name="dl" value="<%= file_names[i] %>"><%= file_names[i] %></button>
+		<hr>
+		<% } %>
+		</form>
+		<% } %>
+		
+		
 	</div>
 </div>
 </div>

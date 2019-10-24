@@ -9,6 +9,10 @@ var expressLayouts = require('express-ejs-layouts');
 
 const {check,validationResult} = require('express-validator');
 
+
+const uploadFolder = './uploads/';
+const fs = require('fs');
+
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -110,7 +114,24 @@ app.post('/games', function(request, response) {
 });
 
 app.get('/learning-materials', function(request, response) {
-	response.render('learning-materials', {page_name: 'learning-materials', u_name: request.session.username, logged_in: request.session.loggedin});
+	var file_names = [];
+	fs.readdir(uploadFolder, (err, files) => {
+		files.forEach(file => {
+			file_names.push(file);
+		});
+	
+		response.render('learning-materials', {page_name: 'learning-materials',
+                                logged_in: request.session.loggedin,
+                                u_id: request.session.userid,
+                                u_name: request.session.username,
+								file_names: file_names});
+		console.log(files);
+	});
+	
+	
+	
+	
+	//response.render('learning-materials', {page_name: 'learning-materials', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
 app.get('/register', function(request, response) {
@@ -351,6 +372,14 @@ app.get('/logout', function(request, response, next) {
 });
 
 
+app.post('/download', function(req, res){
+	console.log(req.body.dl);
+  const file = 'uploads/' + req.body.dl;
+  res.download(file, req.body.dl); // Set disposition and send it.
+});
+
 app.use('/', router);
 app.use('/img', express.static('img'));
 app.listen(process.env.port || 3000);
+
+
