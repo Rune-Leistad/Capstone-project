@@ -105,7 +105,7 @@ app.post('/chat', function(request, response) {
                                 u_name: request.session.username,
                                 u_email: request.session.email,
                                 logged_in: request.session.loggedin,
-                                other: otherUser,
+                                other: otherUser[0],
                                 users: results});
     });
 });
