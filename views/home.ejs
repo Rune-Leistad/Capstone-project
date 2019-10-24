@@ -2,7 +2,7 @@
 <div class="container-fluid padding">
   <div class="row welcome text-center">
     <div class="col-12">
-      <h1 class="display-4">Welcome to QUT's multilingual noticeboard!</h1>
+      <h1 class="display-4">Welcome to QUT multilingual noticeboard!</h1>
       <hr/>
 
       <div>
@@ -53,19 +53,6 @@
         document.getElementById("createNoticeboardPost").style.display = "none";
         }
       </script>
-
-      <% if(logged_in) { %>
-      <div id="tabsView">
-        <ul class="nav nav-tabs justify-content-center">
-          <li class="nav-item active" id="featuredPosts" action="getFeatured" method="GET">
-            <a class="nav-link active">Featured</a>
-          </li>
-          <li class="nav-item" id="allPosts" action="getAll">
-            <a class="nav-link" href="#">The noticeboard</a>
-          </li>
-        </ul>
-      </div> <!-- tabs view-->
-      <% } %>
 
       <div>
         <div class="col-12 px-5" id="featuredPostsView">

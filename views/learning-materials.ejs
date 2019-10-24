@@ -11,9 +11,8 @@
 			them selves.</p>
 		</div>
 		
-		<h3>Documents available for download:</h3>
-		
 		<% if(logged_in) { %>
+		<h3>Documents available for download:</h3>
 		<form action="download" method="post">
 		<% for(var i=0; i < file_names.length; i++) { %>
 		<button type="submit" name="dl" value="<%= file_names[i] %>"><%= file_names[i] %></button>
@@ -21,8 +20,8 @@
 		<% } %>
 		</form>
 		<% } %>
-		
-		
+
+
 	</div>
 </div>
 </div>

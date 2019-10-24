@@ -130,7 +130,7 @@ app.get('/learning-materials', function(request, response) {
 		files.forEach(file => {
 			file_names.push(file);
 		});
-	
+
 		response.render('learning-materials', {page_name: 'learning-materials',
                                 logged_in: request.session.loggedin,
                                 u_id: request.session.userid,
@@ -138,10 +138,10 @@ app.get('/learning-materials', function(request, response) {
 								file_names: file_names});
 		console.log(files);
 	});
-	
-	
-	
-	
+
+
+
+
 	//response.render('learning-materials', {page_name: 'learning-materials', u_name: request.session.username, logged_in: request.session.loggedin});
 });
 
@@ -292,19 +292,6 @@ app.post('/tutorrequest', function(request, response) {
 	response.redirect("/tutor-request");
 });
 
-
-// Register user
-/*app.post('/reg', function(request, response) {
-	con.query('INSERT INTO user_information.log_in_data (user_name, user_last_name, user_email, user_password, user_secQ, user_secQAns, user_state, user_gender, user_phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',[request.body.firstname, request.body.lastname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.gender, request.body.phone], function(error, results, fields){
-		console.log(request.body);
-		response.render('login', {page_name: 'login', 
-								u_name: request.session.username, 
-								logged_in: request.session.loggedin, 
-								error_msg: 0});
-
-	});
-}); */
-
 app.post('/reg', function(request, response) {
 	con.query('INSERT INTO `user_information`.`log_in_data` (`user_name`, `user_email`, `user_password`, `user_secQ`, `user_secQAns`, `user_state`, `user_gender`, `user_phone`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [request.body.firstname, request.body.email, request.body.password, request.body.question,request.body.answer, request.body.state, request.body.gender ,request.body.phone], function(error, results, fields){});
 	request.session.loggedin = true;
@@ -385,7 +372,6 @@ app.get('/logout', function(request, response, next) {
   }
 });
 
-
 app.post('/download', function(req, res){
 	console.log(req.body.dl);
   const file = 'uploads/' + req.body.dl;
@@ -395,5 +381,3 @@ app.post('/download', function(req, res){
 app.use('/', router);
 app.use('/img', express.static('img'));
 app.listen(process.env.port || 3000);
-
-
