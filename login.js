@@ -234,6 +234,12 @@ app.get('/video', function(request, response) {
     });
 });
 
+app.get('/manual', function(request, response) {
+	response.render('manual', {page_name: 'manual',
+                                u_name: request.session.username,
+                                logged_in: request.session.loggedin});
+});
+
 app.get('/changepass', function(request, response) {
 	response.render('changepass', {page_name: 'changepass', u_name: request.session.username, logged_in: request.session.loggedin});
 });
@@ -373,9 +379,9 @@ app.get('/logout', function(request, response, next) {
 });
 
 app.post('/download', function(req, res){
-	console.log(req.body.dl);
-  const file = 'uploads/' + req.body.dl;
-  res.download(file, req.body.dl); // Set disposition and send it.
+    console.log(req.body.dl);
+    const file = 'uploads/' + req.body.dl;
+    res.download(file, req.body.dl); // Set disposition and send it.
 });
 
 app.use('/', router);
